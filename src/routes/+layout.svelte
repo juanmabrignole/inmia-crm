@@ -1,8 +1,22 @@
 <script lang="ts">
+	import '../app.css';
 	import favicon from '../lib/assets/favicon.svg';
+	import { onMount } from 'svelte';
+	import { applyTheme, currentTheme, loadTheme, type Theme } from '$lib/theme';
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();
+	let theme = $state<Theme>('light');
+
+	onMount(() => {
+		loadTheme();
+		theme = currentTheme();
+	});
+
+	function toggleTheme() {
+		theme = theme === 'dark' ? 'light' : 'dark';
+		applyTheme(theme);
+	}
 </script>
 
 <svelte:head>
@@ -11,11 +25,14 @@
 
 {#if data.user}
 	<header class="topbar">
-		<strong>Inmia CRM</strong>
-		<div>
-			<span>{data.user.email}</span>
+		<strong class="brand">Inmia CRM</strong>
+		<div class="actions">
+			<span class="email">{data.user.email}</span>
+			<button type="button" class="ghost" onclick={toggleTheme} aria-label="Cambiar tema">
+				{theme === 'dark' ? '☀ Claro' : '☾ Oscuro'}
+			</button>
 			<form method="POST" action="/logout">
-				<button type="submit">Salir</button>
+				<button type="submit" class="ghost">Salir</button>
 			</form>
 		</div>
 	</header>
@@ -28,24 +45,24 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 12px 16px;
-		background: #1f3a5f;
-		color: #fff;
-		font-family: system-ui, sans-serif;
-	}
-	.topbar div {
-		display: flex;
 		gap: 12px;
-		align-items: center;
-		font-size: 14px;
+		padding: 12px 20px;
+		background: var(--primary);
+		color: var(--on-primary);
+		flex-wrap: wrap;
 	}
-	.topbar form { margin: 0; }
-	.topbar button {
+	.brand { font-size: 18px; letter-spacing: 0.02em; }
+	.actions { display: flex; gap: 10px; align-items: center; font-size: 14px; flex-wrap: wrap; }
+	.email { opacity: 0.85; }
+	.actions form { margin: 0; }
+	.ghost {
 		background: transparent;
-		color: #fff;
-		border: 1px solid #fff;
-		border-radius: 6px;
-		padding: 4px 10px;
+		color: inherit;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		padding: 5px 12px;
 		cursor: pointer;
+		font: inherit;
 	}
+	.ghost:hover { background: rgba(127, 127, 127, 0.15); }
 </style>
