@@ -1,56 +1,23 @@
-# sv
+# Inmia CRM
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+CRM para inmobiliarias en Argentina. SvelteKit + Supabase, desplegado en Cloudflare Workers.
 
-## Creating a project
+## Desarrollo
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@1.3.0 create --template minimal --types ts --no-install inmobiliaria-crm
-```
-
-## Adding features
-
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+npm install
+cp .env.example .env   # completar con URL y publishable key de Supabase
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Migraciones
 
-To create a production version of your app:
+Las migraciones están en `supabase/migrations/`. Se aplican en el SQL Editor de Supabase, en orden.
 
-```sh
-npm run build
+## Deploy en Cloudflare Workers
+
+```bash
+npm run deploy
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Las variables `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_PUBLISHABLE_KEY` se cargan en Cloudflare (Workers → Settings → Variables).
