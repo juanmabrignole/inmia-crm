@@ -2,7 +2,9 @@ import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals, url }) => {
-  const isPublic = url.pathname.startsWith('/login');
+  const isLogin = url.pathname.startsWith('/login');
+  // Páginas públicas: login y la ficha pública de propiedades (/p/...)
+  const isPublic = isLogin || url.pathname.startsWith('/p/');
 
   // Sin Supabase configurado, solo se puede ver la pantalla de login (que muestra el aviso).
   if (!locals.supabase) {
@@ -14,7 +16,7 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
   const { data: { user } } = await locals.supabase.auth.getUser();
 
   if (!user && !isPublic) throw redirect(303, '/login');
-  if (user && isPublic) throw redirect(303, '/');
+  if (user && isLogin) throw redirect(303, '/');
 
   return { user };
 };

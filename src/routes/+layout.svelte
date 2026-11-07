@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '../lib/assets/favicon.svg';
+	import { BRAND } from '../lib/brand';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { applyTheme, currentTheme, loadTheme, type Theme } from '../lib/theme';
@@ -11,8 +12,11 @@
 
 	const menu = [
 		{ href: '/', label: 'Panel', icono: '▦' },
+		{ href: '/agenda', label: 'Agenda', icono: '◷' },
 		{ href: '/propiedades', label: 'Propiedades', icono: '⌂' },
 		{ href: '/propiedades/nueva', label: 'Nueva propiedad', icono: '+' },
+		{ href: '/inquilinos', label: 'Inquilinos', icono: '◎' },
+		{ href: '/contratos', label: 'Contratos', icono: '▤' },
 		{ href: '/asesores', label: 'Asesores', icono: '◉' }
 	];
 
@@ -42,7 +46,7 @@
 {#if data.user}
 	<div class="shell">
 		<aside class="sidebar">
-			<div class="brand">Inmia CRM</div>
+			<div class="brand">{BRAND.nombre}</div>
 
 			<nav class="menu" aria-label="Módulos">
 				{#each menu as item (item.href)}

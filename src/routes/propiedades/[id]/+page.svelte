@@ -1,10 +1,13 @@
 <script lang="ts">
 	import PropiedadForm from '../../../lib/PropiedadForm.svelte';
+	import ShareBar from '../../../lib/ShareBar.svelte';
+	import { page } from '$app/state';
 	import type { ActionData, PageData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
 	const p = $derived(data.propiedad);
+	const publicUrl = $derived(`${page.url.origin}/p/${data.propiedad.id}`);
 
 	// Valores del formulario a partir de la propiedad guardada
 	const valores = $derived({
@@ -36,6 +39,12 @@
 <main class="wrap">
 	<a class="volver" href="/propiedades">← Volver a propiedades</a>
 	<h1>{p.direccion}</h1>
+
+	<section class="card">
+		<h2>Compartir</h2>
+		<ShareBar url={publicUrl} texto={`${p.direccion}${p.precio_venta ? ` · ${p.moneda_venta} ${p.precio_venta}` : ''}`} />
+		<p class="muted small link">Ficha pública: {publicUrl}</p>
+	</section>
 
 	<section class="card">
 		<h2>Fotos</h2>
@@ -90,6 +99,7 @@
 	.small { font-size: 13px; }
 	.error { color: var(--danger); }
 	.ok { color: var(--link); }
+	.link { word-break: break-all; margin: 10px 0 0; }
 	.fotos { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin-bottom: 14px; }
 	figure { margin: 0; display: grid; gap: 6px; }
 	figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
