@@ -128,21 +128,21 @@
 	.card {
 		background: var(--surface);
 		border: 1px solid var(--border);
-		border-radius: 14px;
+		border-radius: var(--radius);
 		padding: 18px;
 		box-shadow: var(--shadow);
 	}
 
 	.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
 	.kpi { display: grid; gap: 4px; border-top: 4px solid var(--primary); }
-	.kpi.tone-accent { border-top-color: var(--accent); }
+	.kpi.tone-accent { border-top-color: var(--link); }
 	.kpi.tone-warn { border-top-color: var(--warn); }
 	.label { font-size: 13px; color: var(--muted); }
 	.value { font-size: 30px; line-height: 1.1; }
 	.hint { font-size: 12px; color: var(--muted); }
 
-	.grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; }
-	@media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+	.grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+	@media (min-width: 801px) { .grid { grid-template-columns: 1.4fr 1fr; } }
 
 	.card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
 	.chart { width: 100%; height: auto; }
@@ -161,5 +161,5 @@
 	.prop img, .noimg { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 	.noimg { display: grid; place-items: center; background: var(--surface-2); color: var(--muted); font-size: 13px; }
 	.prop-body { padding: 12px; display: grid; gap: 4px; }
-	.price { font-weight: 600; color: var(--accent); }
+	.price { font-weight: 600; color: var(--link); }
 </style>

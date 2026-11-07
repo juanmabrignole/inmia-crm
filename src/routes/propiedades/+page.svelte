@@ -70,9 +70,9 @@
 	.chip { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 14px; background: var(--surface); }
 	.chip.activo { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
 	.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-	.card { display: grid; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; color: var(--text); text-decoration: none; box-shadow: var(--shadow); }
+	.card { display: grid; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; color: var(--text); text-decoration: none; box-shadow: var(--shadow); }
 	.card img, .noimg { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 	.noimg { display: grid; place-items: center; background: var(--surface-2); color: var(--muted); font-size: 13px; }
 	.body { padding: 12px; display: grid; gap: 4px; }
-	.precio { color: var(--accent); font-weight: 600; font-size: 14px; }
+	.precio { color: var(--link); font-weight: 600; font-size: 14px; }
 </style>

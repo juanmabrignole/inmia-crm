@@ -82,13 +82,13 @@
 	.wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 16px; }
 	h1 { margin: 0; color: var(--text); font-size: 24px; }
 	h2 { margin: 0 0 12px; font-size: 17px; color: var(--text); }
-	.volver { color: var(--accent); text-decoration: none; font-size: 14px; }
-	.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
+	.volver { color: var(--link); text-decoration: none; font-size: 14px; }
+	.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
 	.peligro { border-color: var(--danger); }
 	.muted { color: var(--muted); }
 	.small { font-size: 13px; }
 	.error { color: var(--danger); }
-	.ok { color: var(--accent); }
+	.ok { color: var(--link); }
 	.fotos { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin-bottom: 14px; }
 	figure { margin: 0; display: grid; gap: 6px; }
 	figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
