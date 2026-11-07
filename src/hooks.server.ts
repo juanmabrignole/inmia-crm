@@ -3,7 +3,17 @@ import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  event.locals.supabase = createServerClient(env.PUBLIC_SUPABASE_URL, env.PUBLIC_SUPABASE_PUBLISHABLE_KEY, {
+  const url = env.PUBLIC_SUPABASE_URL;
+  const key = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !key) {
+    // Sin variables de Supabase la app igual arranca; las rutas que las necesitan avisan.
+    event.locals.supabase = null;
+    event.locals.getSession = async () => null;
+    return resolve(event);
+  }
+
+  event.locals.supabase = createServerClient(url, key, {
     cookies: {
       getAll: () => event.cookies.getAll(),
       setAll: (cookiesToSet) =>
@@ -16,7 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   event.locals.getSession = async () => {
     const {
       data: { session }
-    } = await event.locals.supabase.auth.getSession();
+    } = await event.locals.supabase!.auth.getSession();
     return session;
   };
 
