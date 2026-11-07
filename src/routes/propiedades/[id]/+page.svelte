@@ -24,6 +24,7 @@
 		precio_alquiler: p.precio_alquiler?.toString() ?? '',
 		moneda_alquiler: p.moneda_alquiler ?? 'ARS',
 		estado_alquiler: p.estado_alquiler ?? 'disponible',
+		asesor_id: p.asesor_id ?? '',
 		publicada: String(p.publicada ?? true)
 	});
 </script>
@@ -65,7 +66,7 @@
 
 	<section class="card">
 		<h2>Datos de la propiedad</h2>
-		<PropiedadForm values={valores} error={form?.error ?? null} submitLabel="Guardar cambios" />
+		<PropiedadForm values={valores} error={form?.error ?? null} submitLabel="Guardar cambios" asesores={data.asesores} />
 		{#if form?.ok}<p class="ok">{form.ok}</p>{/if}
 	</section>
 

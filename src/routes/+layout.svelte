@@ -12,7 +12,8 @@
 	const menu = [
 		{ href: '/', label: 'Panel', icono: '▦' },
 		{ href: '/propiedades', label: 'Propiedades', icono: '⌂' },
-		{ href: '/propiedades/nueva', label: 'Nueva propiedad', icono: '+' }
+		{ href: '/propiedades/nueva', label: 'Nueva propiedad', icono: '+' },
+		{ href: '/asesores', label: 'Asesores', icono: '◉' }
 	];
 
 	function isActive(href: string) {

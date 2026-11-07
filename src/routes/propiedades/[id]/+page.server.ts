@@ -14,7 +14,12 @@ export const load: PageServerLoad = async ({ locals, params }) => {
   if (dbError || !data) throw error(404, 'Propiedad no encontrada');
 
   const fotos = [...(data.fotos ?? [])].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
-  return { propiedad: data, fotos };
+  const { data: asesores } = await locals.supabase!
+    .from('asesores')
+    .select('id, nombre')
+    .or(`activo.eq.true,id.eq.${data.asesor_id ?? '00000000-0000-0000-0000-000000000000'}`)
+    .order('nombre');
+  return { propiedad: data, fotos, asesores: asesores ?? [] };
 };
 
 export const actions: Actions = {

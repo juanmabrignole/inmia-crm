@@ -15,7 +15,7 @@ export const GET: RequestHandler = async ({ locals }) => {
   const { data, error } = await locals.supabase!
     .from('propiedades')
     .select(
-      'id, direccion, tipo, operacion, ambientes, dormitorios, banos, superficie_m2, antiguedad_anios, cochera, descripcion, precio_venta, moneda_venta, estado_venta, precio_alquiler, moneda_alquiler, estado_alquiler, created_at, fotos(url, orden)'
+      'id, direccion, tipo, operacion, ambientes, dormitorios, banos, superficie_m2, antiguedad_anios, cochera, descripcion, precio_venta, moneda_venta, estado_venta, precio_alquiler, moneda_alquiler, estado_alquiler, created_at, fotos(url, orden), asesores(nombre, email, telefono)'
     )
     .eq('publicada', true)
     .order('created_at', { ascending: false });
@@ -43,6 +43,7 @@ export const GET: RequestHandler = async ({ locals }) => {
       (alquiler ? tag('precio_alquiler', p.precio_alquiler) + tag('moneda_alquiler', p.moneda_alquiler) : '') +
       tag('descripcion', p.descripcion) +
       (fotos.length ? `    <fotos>\n${fotos.map((f) => `      <foto>${escapeXml(f.url)}</foto>\n`).join('')}    </fotos>\n` : '') +
+      (p.asesores ? `    <asesor>\n` + tag('nombre', p.asesores.nombre) + tag('email', p.asesores.email) + tag('telefono', p.asesores.telefono) + `    </asesor>\n` : '') +
       tag('actualizado', p.created_at) +
       `  </propiedad>\n`
     );

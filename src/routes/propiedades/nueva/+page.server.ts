@@ -1,6 +1,16 @@
-import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import { error, fail, redirect } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
 import { parsePropiedad } from '../../../lib/propiedades';
+
+export const load: PageServerLoad = async ({ locals }) => {
+  const { data, error: dbError } = await locals.supabase!
+    .from('asesores')
+    .select('id, nombre')
+    .eq('activo', true)
+    .order('nombre');
+  if (dbError) throw error(500, 'No se pudieron cargar los asesores');
+  return { asesores: data ?? [] };
+};
 
 export const actions: Actions = {
   default: async ({ request, locals }) => {
@@ -10,13 +20,13 @@ export const actions: Actions = {
       return fail(400, { error: parsed.error ?? 'Revisá los datos.' });
     }
 
-    const { data, error } = await locals.supabase!
+    const { data, error: dbError } = await locals.supabase!
       .from('propiedades')
       .insert(parsed.data)
       .select('id')
       .single();
 
-    if (error || !data) return fail(500, { error: error?.message ?? 'No se pudo guardar.' });
+    if (dbError || !data) return fail(500, { error: dbError?.message ?? 'No se pudo guardar.' });
     throw redirect(303, `/propiedades/${data.id}`);
   }
 };

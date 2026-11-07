@@ -28,6 +28,7 @@ export type PropiedadInput = {
   moneda_alquiler: string;
   estado_alquiler: string;
   publicada: boolean;
+  asesor_id: string | null;
 };
 
 const txt = (f: FormData, k: string) => {
@@ -81,7 +82,8 @@ export function parsePropiedad(form: FormData): { data?: PropiedadInput; error?:
       precio_alquiler: precioAlquiler,
       moneda_alquiler: String(form.get('moneda_alquiler') ?? 'ARS'),
       estado_alquiler: String(form.get('estado_alquiler') ?? 'disponible'),
-      publicada: form.get('publicada') === 'on'
+      publicada: form.get('publicada') === 'on',
+      asesor_id: txt(form, 'asesor_id')
     }
   };
 }

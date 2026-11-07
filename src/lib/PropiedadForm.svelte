@@ -4,8 +4,14 @@
 	let {
 		values = {},
 		error = null,
-		submitLabel = 'Guardar'
-	}: { values?: Record<string, string>; error?: string | null; submitLabel?: string } = $props();
+		submitLabel = 'Guardar',
+		asesores = []
+	}: {
+		values?: Record<string, string>;
+		error?: string | null;
+		submitLabel?: string;
+		asesores?: { id: string; nombre: string }[];
+	} = $props();
 
 	const v = (k: string, d = '') => values[k] ?? d;
 </script>
@@ -22,6 +28,14 @@
 			<select class="input" name="operacion">
 				{#each OPERACIONES as o (o.value)}
 					<option value={o.value} selected={v('operacion', 'venta') === o.value}>{o.label}</option>
+				{/each}
+			</select>
+		</label>
+		<label>Asesor responsable
+			<select class="input" name="asesor_id">
+				<option value="" selected={!v('asesor_id')}>Sin asignar</option>
+				{#each asesores as a (a.id)}
+					<option value={a.id} selected={v('asesor_id') === a.id}>{a.nombre}</option>
 				{/each}
 			</select>
 		</label>

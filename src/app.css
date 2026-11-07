@@ -7,6 +7,7 @@
   --text: #101828;
   --muted: #667085;
   --border: #e4e9f0;
+  --border-strong: #aab7c9;
   --primary: #14213d;
   --on-primary: #ffffff;
   --sidebar: #14213d;
@@ -30,6 +31,7 @@
   --text: #f2f4f7;
   --muted: #98a2b3;
   --border: #26303f;
+  --border-strong: #4d5b73;
   --primary: #ffd23f;
   --on-primary: #14213d;
   --sidebar: #0b0f17;
@@ -72,7 +74,7 @@ a { color: var(--link); }
   width: 100%;
   min-height: 44px;
   padding: 10px 12px;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border-strong);
   border-radius: 12px;
   background: var(--surface);
   color: var(--text);
