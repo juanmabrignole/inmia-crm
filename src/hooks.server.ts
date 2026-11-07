@@ -1,6 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import type { Handle } from '@sveltejs/kit';
-import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '$lib/config';
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from './lib/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
   event.locals.supabase = createServerClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
