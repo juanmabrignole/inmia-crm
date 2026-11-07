@@ -1,19 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
 import type { Handle } from '@sveltejs/kit';
-import { env } from '$env/dynamic/public';
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '$lib/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  const url = env.PUBLIC_SUPABASE_URL;
-  const key = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  if (!url || !key) {
-    // Sin variables de Supabase la app igual arranca; las rutas que las necesitan avisan.
-    event.locals.supabase = null;
-    event.locals.getSession = async () => null;
-    return resolve(event);
-  }
-
-  event.locals.supabase = createServerClient(url, key, {
+  event.locals.supabase = createServerClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
     cookies: {
       getAll: () => event.cookies.getAll(),
       setAll: (cookiesToSet) =>
