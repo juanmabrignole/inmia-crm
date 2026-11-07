@@ -51,3 +51,29 @@ body {
 }
 
 a { color: var(--accent); }
+
+.input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.btn-danger { color: var(--danger); border-color: var(--danger); }
