@@ -27,7 +27,7 @@ export const load: PageServerLoad = async ({ locals }) => {
   const sb = locals.supabase;
   if (!sb) throw new Error('Supabase no configurado');
 
-  const [{ data: propsData }, { data: tasData }] = await Promise.all([
+  const [{ data: propsData, error: propsError }, { data: tasData, error: tasError }] = await Promise.all([
     sb
       .from('propiedades')
       .select(
@@ -80,6 +80,12 @@ export const load: PageServerLoad = async ({ locals }) => {
       foto:
         [...(p.fotos ?? [])].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))[0]?.url ?? null
     })),
-    ultimasTasaciones: tas.slice(0, 5)
+    ultimasTasaciones: tas.slice(0, 5),
+    debug: {
+      filasPropiedades: props.length,
+      filasTasaciones: tas.length,
+      errorPropiedades: propsError?.message ?? null,
+      errorTasaciones: tasError?.message ?? null
+    }
   };
 };

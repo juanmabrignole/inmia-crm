@@ -115,6 +115,7 @@
 			<p class="muted">Todavía no cargaste propiedades. Empezá desde el módulo de propiedades.</p>
 		{/if}
 	</section>
+<p class="muted small">DEBUG · propiedades: {data.debug.filasPropiedades} · tasaciones: {data.debug.filasTasaciones} · error props: {data.debug.errorPropiedades ?? 'ninguno'} · error tas: {data.debug.errorTasaciones ?? 'ninguno'}</p>
 </main>
 
 <style>
