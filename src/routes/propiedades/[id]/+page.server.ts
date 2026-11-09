@@ -19,7 +19,13 @@ export const load: PageServerLoad = async ({ locals, params }) => {
     .select('id, nombre')
     .or(`activo.eq.true,id.eq.${data.asesor_id ?? '00000000-0000-0000-0000-000000000000'}`)
     .order('nombre');
-  return { propiedad: data, fotos, asesores: asesores ?? [] };
+  const { data: tasaciones } = await locals.supabase!
+    .from('tasaciones')
+    .select('id, fecha, operacion, moneda, valor_sugerido, valor_minimo, valor_maximo')
+    .eq('propiedad_id', params.id)
+    .order('fecha', { ascending: false });
+
+  return { propiedad: data, fotos, asesores: asesores ?? [], tasaciones: tasaciones ?? [] };
 };
 
 export const actions: Actions = {

@@ -79,6 +79,29 @@
 		{#if form?.ok}<p class="ok">{form.ok}</p>{/if}
 	</section>
 
+	<section class="card">
+		<div class="cabecera">
+			<h2>Tasaciones</h2>
+			<a class="btn btn-primary" href="/propiedades/{p.id}/tasar">+ Nueva tasación</a>
+		</div>
+		{#if data.tasaciones.length}
+			<ul class="lista">
+				{#each data.tasaciones as t (t.id)}
+					<li>
+						<a href="/tasaciones/{t.id}/informe">
+							<strong>{new Date(t.fecha).toLocaleDateString('es-AR')}</strong>
+							· {t.operacion === 'venta' ? 'Venta' : 'Alquiler'}
+							· {new Intl.NumberFormat('es-AR', { style: 'currency', currency: t.moneda, maximumFractionDigits: 0 }).format(t.valor_sugerido ?? 0)}
+							<span class="muted small">(rango {new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(t.valor_minimo ?? 0)} – {new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(t.valor_maximo ?? 0)})</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<p class="muted small">Todavía no hay tasaciones para esta propiedad.</p>
+		{/if}
+	</section>
+
 	<section class="card peligro">
 		<h2>Eliminar propiedad</h2>
 		<p class="muted small">Borra la propiedad, sus fotos y su historial de tasaciones. No se puede deshacer.</p>
@@ -95,6 +118,11 @@
 	.volver { color: var(--link); text-decoration: none; font-size: 14px; }
 	.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
 	.peligro { border-color: var(--danger); }
+	.cabecera { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+	.cabecera h2 { margin: 0; }
+	.lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+	.lista li { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+	.lista a { color: var(--text); text-decoration: none; }
 	.muted { color: var(--muted); }
 	.small { font-size: 13px; }
 	.error { color: var(--danger); }
