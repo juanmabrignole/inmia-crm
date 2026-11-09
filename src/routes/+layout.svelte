@@ -16,6 +16,7 @@
 		{ href: '/agenda', label: 'Agenda', icono: '◷' },
 		{ href: '/propiedades', label: 'Propiedades', icono: '⌂' },
 		{ href: '/propiedades/nueva', label: 'Nueva propiedad', icono: '+' },
+		{ href: '/leads', label: 'Consultas', icono: '✉' },
 		{ href: '/inquilinos', label: 'Inquilinos', icono: '◎' },
 		{ href: '/contratos', label: 'Contratos', icono: '▤' },
 		{ href: '/asesores', label: 'Asesores', icono: '◉' },
