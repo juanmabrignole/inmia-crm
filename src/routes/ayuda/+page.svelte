@@ -200,6 +200,5 @@
 		background: var(--accent);
 		color: var(--accent-ink);
 		border-color: var(--accent);
-		font-weight: 600;
 	}
 </style>
