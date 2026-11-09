@@ -1,6 +1,7 @@
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { parsePropiedad } from '../../../lib/propiedades';
+import { miPerfil } from '../../../lib/perfil';
 
 export const load: PageServerLoad = async ({ locals }) => {
   const { data, error: dbError } = await locals.supabase!
@@ -18,6 +19,12 @@ export const actions: Actions = {
     const parsed = parsePropiedad(form);
     if (parsed.error || !parsed.data) {
       return fail(400, { error: parsed.error ?? 'Revisá los datos.' });
+    }
+
+    const perfil = await miPerfil(locals.supabase!);
+    if (perfil.rol !== 'admin') {
+      if (!perfil.asesor_id) return fail(400, { error: 'Tu usuario no tiene un asesor asignado. Pedile al administrador que te configure en Equipo.' });
+      parsed.data.asesor_id = perfil.asesor_id;
     }
 
     const { data, error: dbError } = await locals.supabase!

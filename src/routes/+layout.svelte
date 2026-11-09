@@ -18,7 +18,8 @@
 		{ href: '/propiedades/nueva', label: 'Nueva propiedad', icono: '+' },
 		{ href: '/inquilinos', label: 'Inquilinos', icono: '◎' },
 		{ href: '/contratos', label: 'Contratos', icono: '▤' },
-		{ href: '/asesores', label: 'Asesores', icono: '◉' }
+		{ href: '/asesores', label: 'Asesores', icono: '◉' },
+		{ href: '/equipo', label: 'Equipo', icono: '⚑', admin: true }
 	];
 
 	function isActive(href: string) {
@@ -50,7 +51,7 @@
 			<div class="brand">{BRAND.nombre}</div>
 
 			<nav class="menu" aria-label="Módulos">
-				{#each menu as item (item.href)}
+				{#each menu.filter((m) => !m.admin || data.perfil?.rol === 'admin') as item (item.href)}
 					<a href={item.href} class:active={isActive(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
 						<span class="icono" aria-hidden="true">{item.icono}</span>
 						{item.label}

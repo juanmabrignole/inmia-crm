@@ -17,7 +17,7 @@
 			<h1>Asesores</h1>
 			<p class="muted">Equipo que carga y comparte propiedades.</p>
 		</div>
-		<a class="btn btn-primary" href="/asesores/nueva">+ Nuevo asesor</a>
+		{#if data.perfil?.rol === 'admin'}<a class="btn btn-primary" href="/asesores/nueva">+ Nuevo asesor</a>{/if}
 	</header>
 
 	{#if data.asesores.length}

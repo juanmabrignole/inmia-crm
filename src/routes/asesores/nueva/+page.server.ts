@@ -1,6 +1,13 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { parseAsesor } from '../../../lib/asesores';
+import { miPerfil } from '../../../lib/perfil';
+
+export const load: PageServerLoad = async ({ locals }) => {
+  const perfil = await miPerfil(locals.supabase!);
+  if (perfil.rol !== 'admin') throw redirect(303, '/asesores');
+  return {};
+};
 
 export const actions: Actions = {
   default: async ({ request, locals }) => {

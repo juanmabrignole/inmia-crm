@@ -46,12 +46,14 @@
 				<label>Día de pago (1 a 31)
 					<input class="input" type="number" min="1" max="31" name="dia_pago" />
 				</label>
+				{#if data.perfil?.rol === 'admin'}
 				<label>Asesor
 					<select class="input" name="asesor_id">
 						<option value="">Sin asignar</option>
 						{#each data.asesores as a (a.id)}<option value={a.id}>{a.nombre}</option>{/each}
 					</select>
 				</label>
+				{/if}
 				<label class="full">Notas
 					<textarea class="input" name="notas" rows="3"></textarea>
 				</label>

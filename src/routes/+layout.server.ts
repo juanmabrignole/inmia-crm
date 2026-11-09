@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
+import { miPerfil } from '../lib/perfil';
 
 export const load: LayoutServerLoad = async ({ locals, url }) => {
   const isLogin = url.pathname.startsWith('/login');
@@ -9,7 +10,7 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
   // Sin Supabase configurado, solo se puede ver la pantalla de login (que muestra el aviso).
   if (!locals.supabase) {
     if (!isPublic) throw redirect(303, '/login');
-    return { user: null };
+    return { user: null, perfil: null };
   }
 
   // getUser valida el token contra Supabase (a diferencia de getSession).
@@ -18,5 +19,6 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
   if (!user && !isPublic) throw redirect(303, '/login');
   if (user && isLogin) throw redirect(303, '/');
 
-  return { user };
+  const perfil = user ? await miPerfil(locals.supabase) : null;
+  return { user, perfil };
 };

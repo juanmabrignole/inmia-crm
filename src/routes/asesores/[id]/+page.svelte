@@ -22,12 +22,14 @@
 	<a class="volver" href="/asesores">← Volver a asesores</a>
 	<h1>{a.nombre}</h1>
 
+	{#if data.perfil?.rol === 'admin'}
 	<section class="card">
 		<h2>Datos de contacto</h2>
 		<AsesorForm values={valores} error={form?.error ?? null} submitLabel="Guardar cambios" />
 		{#if form?.ok}<p class="ok">{form.ok}</p>{/if}
 	</section>
 
+	{/if}
 	<section class="card">
 		<h2>Propiedades asignadas ({data.propiedades.length})</h2>
 		{#if data.propiedades.length}
@@ -44,6 +46,7 @@
 		{/if}
 	</section>
 
+	{#if data.perfil?.rol === 'admin'}
 	<section class="card peligro">
 		<h2>Eliminar asesor</h2>
 		<p class="muted small">Sus propiedades quedan sin asesor asignado. No se puede deshacer.</p>
@@ -51,6 +54,7 @@
 			<button class="btn btn-danger" type="submit">Eliminar asesor</button>
 		</form>
 	</section>
+	{/if}
 </main>
 
 <style>
