@@ -102,6 +102,14 @@
 		{/if}
 	</section>
 
+	<section class="card">
+		<div class="cabecera">
+			<h2>Portales</h2>
+			<a class="btn btn-primary" href="/propiedades/{p.id}/mercadolibre">Vista previa Mercado Libre</a>
+		</div>
+		<p class="muted small">Todavía no se publica automáticamente. Desde la vista previa se ve qué falta.</p>
+	</section>
+
 	<section class="card peligro">
 		<h2>Eliminar propiedad</h2>
 		<p class="muted small">Borra la propiedad, sus fotos y su historial de tasaciones. No se puede deshacer.</p>
