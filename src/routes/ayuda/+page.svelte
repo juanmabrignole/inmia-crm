@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/state';
+
 	type Modulo = { id: string; titulo: string; rol: 'todos' | 'admin'; resumen: string; pasos: string[] };
 
 	const primerosPasos = [
@@ -141,9 +143,9 @@
 	</header>
 
 	<nav class="indice" aria-label="Módulos">
-		<a href="#primeros-pasos">Primeros pasos</a>
+		<a href="#primeros-pasos" class:activa={page.url.hash === '#primeros-pasos'}>Primeros pasos</a>
 		{#each modulos as m (m.id)}
-			<a href="#{m.id}">{m.titulo}{m.rol === 'admin' ? ' (admin)' : ''}</a>
+			<a href="#{m.id}" class:activa={page.url.hash === `#${m.id}`}>{m.titulo}{m.rol === 'admin' ? ' (admin)' : ''}</a>
 		{/each}
 	</nav>
 
@@ -180,6 +182,24 @@
 	.rol { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); }
 	.rol.admin { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 	.indice { display: flex; gap: 6px; flex-wrap: wrap; }
-	.indice a { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 14px; }
-	.indice a:hover { background: rgba(127, 127, 127, 0.18); }
+	.indice a {
+		padding: 7px 14px;
+		border-radius: 999px;
+		border: 1.5px solid var(--border-strong);
+		background: var(--surface);
+		color: var(--text);
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 500;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+		transition: background 0.15s ease, border-color 0.15s ease;
+	}
+	.indice a:hover,
+	.indice a:focus-visible,
+	.indice a.activa {
+		background: var(--accent);
+		color: var(--accent-ink);
+		border-color: var(--accent);
+		font-weight: 600;
+	}
 </style>
