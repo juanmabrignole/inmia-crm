@@ -20,7 +20,8 @@
 		{ href: '/inquilinos', label: 'Inquilinos', icono: '◎' },
 		{ href: '/contratos', label: 'Contratos', icono: '▤' },
 		{ href: '/asesores', label: 'Asesores', icono: '◉' },
-		{ href: '/equipo', label: 'Equipo', icono: '⚑', admin: true }
+		{ href: '/equipo', label: 'Equipo', icono: '⚑', admin: true },
+		{ href: '/ayuda', label: 'Ayuda', icono: '?' }
 	];
 
 	function isActive(href: string) {
