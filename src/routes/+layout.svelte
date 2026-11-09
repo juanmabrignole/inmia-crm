@@ -11,6 +11,7 @@
 	let theme = $state<Theme>('light');
 
 	const menu = [
+		{ href: '/hoy', label: 'Hoy', icono: '☀' },
 		{ href: '/', label: 'Panel', icono: '▦' },
 		{ href: '/agenda', label: 'Agenda', icono: '◷' },
 		{ href: '/propiedades', label: 'Propiedades', icono: '⌂' },
