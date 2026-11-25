@@ -9,52 +9,72 @@
 </svelte:head>
 
 <main class="login">
-	<h1>Inmia CRM</h1>
-	<p class="sub">Ingresá con el usuario que te dio el administrador.</p>
+	<div class="tarjeta">
+		<div class="marca">
+			<img src="/logo-inmia.svg" alt="" width="56" height="56" />
+			<h1>Inmia CRM</h1>
+		</div>
+		<p class="sub">Ingresá con el usuario que te dio el administrador.</p>
 
-	{#if !data.configured}
-		<p class="error">Falta configurar Supabase (PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_PUBLISHABLE_KEY).</p>
-	{/if}
-
-	<form method="POST">
-		<label>
-			Email
-			<input type="email" name="email" required autocomplete="username" value={form?.email ?? ''} />
-		</label>
-		<label>
-			Contraseña
-			<input type="password" name="password" required autocomplete="current-password" />
-		</label>
-
-		{#if form?.error}
-			<p class="error">{form.error}</p>
+		{#if !data.configured}
+			<p class="error">Falta configurar Supabase (PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_PUBLISHABLE_KEY).</p>
 		{/if}
 
-		<button type="submit" disabled={!data.configured}>Ingresar</button>
-	</form>
+		<form method="POST">
+			<label>
+				Email
+				<input class="input" type="email" name="email" required autocomplete="username" value={form?.email ?? ''} />
+			</label>
+			<label>
+				Contraseña
+				<input class="input" type="password" name="password" required autocomplete="current-password" />
+			</label>
+
+			{#if form?.error}
+				<p class="error">{form.error}</p>
+			{/if}
+
+			<button class="btn btn-primary" type="submit" disabled={!data.configured}>Ingresar</button>
+		</form>
+	</div>
 </main>
 
 <style>
 	.login {
-		max-width: 360px;
-		margin: 80px auto;
+		min-height: 100vh;
+		display: grid;
+		place-items: center;
 		padding: 24px;
-		font-family: system-ui, sans-serif;
+		background: var(--bg);
+		font-family: var(--font);
+		color: var(--text);
 	}
-	h1 { color: #1f3a5f; margin-bottom: 4px; }
-	.sub { color: #555; margin-top: 0; }
-	form { display: grid; gap: 14px; }
-	label { display: grid; gap: 6px; font-size: 14px; }
-	input { padding: 10px; border: 1px solid #bbb; border-radius: 6px; font-size: 16px; }
-	button {
+	.tarjeta {
+		width: min(380px, 100%);
+		padding: 32px 28px;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+	}
+	.marca { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+	.marca img { border-radius: 14px; flex-shrink: 0; }
+	h1 { margin: 0; font-size: 26px; font-weight: 700; color: var(--text); }
+	.sub { color: var(--muted); margin: 8px 0 24px; font-size: 14px; line-height: 1.5; }
+	form { display: grid; gap: 16px; }
+	label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--text); }
+	button[type='submit'] {
+		margin-top: 8px;
 		padding: 12px;
 		border: 0;
-		border-radius: 8px;
-		background: #1f3a5f;
-		color: #fff;
-		font-size: 16px;
+		border-radius: 12px;
+		background: var(--primary);
+		color: var(--on-primary);
+		font: inherit;
+		font-weight: 700;
 		cursor: pointer;
 	}
-	button:disabled { opacity: 0.5; cursor: not-allowed; }
-	.error { color: #b00020; font-size: 14px; }
+	button[type='submit']:hover { filter: brightness(1.08); }
+	button[type='submit']:disabled { opacity: 0.5; cursor: not-allowed; }
+	.error { color: var(--danger); font-size: 14px; margin: 0; }
 </style>
