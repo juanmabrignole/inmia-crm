@@ -68,7 +68,7 @@
 	<div class="shell" class:colapsado>
 		<aside class="sidebar">
 			<div class="cabeza">
-				<div class="brand"><span class="texto">{BRAND.nombre}</span></div>
+				<div class="brand"><img class="logo" src="/logo-inmia.svg" alt="" width="32" height="32" /><span class="texto">{BRAND.nombre}</span></div>
 				<button type="button" class="colapsar" onclick={toggleMenu} aria-label={colapsado ? 'Desplegar menú' : 'Ocultar menú'} aria-expanded={!colapsado}>
 					{colapsado ? '»' : '«'}
 				</button>
@@ -123,8 +123,8 @@
 		color: var(--on-sidebar);
 	}
 	.cabeza { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-	.brand { font-size: 20px; font-weight: 700; letter-spacing: 0.01em; padding: 0 10px; white-space: nowrap; }
-	.brand::before { content: '■ '; color: var(--accent); }
+	.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; letter-spacing: 0.01em; padding: 0 10px; white-space: nowrap; }
+	.brand .logo { width: 32px; height: 32px; flex-shrink: 0; border-radius: 9px; }
 	.colapsar { display: none; }
 	.menu { display: flex; flex-wrap: wrap; gap: 4px; }
 	.menu a {
@@ -200,7 +200,6 @@
 		.colapsado .sidebar { padding: 20px 10px; }
 		.colapsado .cabeza { flex-direction: column; gap: 12px; }
 		.colapsado .brand { padding: 0; }
-		.colapsado .brand::before { content: '■'; }
 		.colapsado .texto { display: none; }
 		.colapsado .menu a { justify-content: center; padding: 10px 0; }
 		.colapsado .ghost { width: 40px; padding: 8px 0; margin: 0 auto; }
