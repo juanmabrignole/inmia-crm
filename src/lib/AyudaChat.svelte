@@ -35,7 +35,7 @@
 </script>
 
 <section class="card chat" aria-labelledby="chat-titulo">
-	<h2 id="chat-titulo">Preguntale al asistente</h2>
+	<h2 id="chat-titulo">Preguntale al Agente Inmia</h2>
 	<p class="muted">Respuestas sobre cómo usar la app, según esta guía. Es una IA: para temas legales o impositivos, consultá a un profesional.</p>
 
 	<form onsubmit={preguntar}>

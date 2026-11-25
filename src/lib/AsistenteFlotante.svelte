@@ -7,10 +7,10 @@
 <svelte:window onkeydown={(e) => { if (e.key === 'Escape') abierto = false; }} />
 
 {#if abierto}
-	<section class="panel" aria-label="Asistente de la app">
+	<section class="panel" aria-label="Agente Inmia">
 		<header>
-			<span class="titulo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6" /><circle cx="12" cy="3" r="1" /></svg>Asistente IA</span>
-			<button type="button" class="cerrar" onclick={() => (abierto = false)} aria-label="Cerrar asistente">×</button>
+			<span class="titulo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6" /><circle cx="12" cy="3" r="1" /></svg>Agente Inmia</span>
+			<button type="button" class="cerrar" onclick={() => (abierto = false)} aria-label="Cerrar agente">×</button>
 		</header>
 		<div class="cuerpo">
 			<AyudaChat />
@@ -20,7 +20,7 @@
 
 <button type="button" class="flotante" onclick={() => (abierto = !abierto)} aria-expanded={abierto} aria-controls="panel-asistente">
 	<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6" /><circle cx="12" cy="3" r="1" /></svg>
-	{abierto ? 'Cerrar' : 'Asistente IA'}
+	{abierto ? 'Cerrar' : 'Agente Inmia'}
 </button>
 
 <style>
