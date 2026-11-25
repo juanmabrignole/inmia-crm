@@ -4,7 +4,7 @@ import type { RequestHandler } from './$types';
 import { contextoAyuda } from '../../../lib/ayuda';
 
 const MAX_PREGUNTA = 400;
-const MODELO_POR_DEFECTO = '@cf/meta/llama-3.1-8b-instruct';
+const MODELO_POR_DEFECTO = '@cf/meta/llama-3.1-8b-instruct-fast';
 
 // Binding de Workers AI (ver wrangler.jsonc). Tipado mínimo para no depender de tipos extra.
 type AiBinding = { run: (modelo: string, entrada: Record<string, unknown>) => Promise<{ response?: string }> };
