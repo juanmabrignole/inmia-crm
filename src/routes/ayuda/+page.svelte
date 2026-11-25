@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { primerosPasos, modulos } from '../../lib/ayuda';
-	import AyudaChat from '../../lib/AyudaChat.svelte';
 
 
 </script>
@@ -15,8 +14,6 @@
 		<h1>Ayuda</h1>
 		<p class="muted">Guía de uso para asesores y administradores. Elegí un módulo o leé los primeros pasos.</p>
 	</header>
-
-	<AyudaChat />
 
 	<nav class="indice" aria-label="Módulos">
 		<a href="#primeros-pasos" class:activa={page.url.hash === '#primeros-pasos'}>Primeros pasos</a>

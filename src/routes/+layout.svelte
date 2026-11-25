@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { applyTheme, currentTheme, loadTheme, type Theme } from '../lib/theme';
+	import AsistenteFlotante from '../lib/AsistenteFlotante.svelte';
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();
@@ -101,6 +102,7 @@
 			{@render children()}
 		</div>
 	</div>
+	<AsistenteFlotante />
 {:else}
 	{@render children()}
 {/if}
