@@ -11,6 +11,7 @@
 		const texto = pregunta.trim();
 		if (!texto || cargando) return;
 		cargando = true;
+		pregunta = '';
 		error = null;
 		respuesta = '';
 		try {

@@ -9,7 +9,7 @@
 {#if abierto}
 	<section class="panel" aria-label="Asistente de la app">
 		<header>
-			<span>Asistente</span>
+			<span class="titulo"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6" /><circle cx="12" cy="3" r="1" /></svg>Asistente IA</span>
 			<button type="button" class="cerrar" onclick={() => (abierto = false)} aria-label="Cerrar asistente">×</button>
 		</header>
 		<div class="cuerpo">
@@ -19,15 +19,32 @@
 {/if}
 
 <button type="button" class="flotante" onclick={() => (abierto = !abierto)} aria-expanded={abierto} aria-controls="panel-asistente">
-	{abierto ? 'Cerrar' : 'Asistente'}
+	<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6" /><circle cx="12" cy="3" r="1" /></svg>
+	{abierto ? 'Cerrar' : 'Asistente IA'}
 </button>
 
 <style>
+	.icono {
+		width: 20px;
+		height: 20px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		flex-shrink: 0;
+	}
+	.icono circle {
+		fill: currentColor;
+	}
 	.flotante {
 		position: fixed;
 		right: 16px;
 		bottom: 16px;
 		z-index: 50;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
 		padding: 12px 18px;
 		border-radius: 999px;
 		border: none;
@@ -36,6 +53,11 @@
 		font-weight: 600;
 		box-shadow: var(--shadow);
 		cursor: pointer;
+	}
+	.titulo {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
 	}
 	.panel {
 		position: fixed;
