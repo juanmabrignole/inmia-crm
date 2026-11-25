@@ -6,6 +6,9 @@
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
+	// El formulario puede devolver los datos cargados y el campo con error
+	const f = $derived(form as { error?: string; campo?: string | null; values?: Record<string, string>; ok?: string } | null);
+
 	const p = $derived(data.propiedad);
 	const publicUrl = $derived(`${page.url.origin}/p/${data.propiedad.id}`);
 
@@ -75,7 +78,7 @@
 
 	<section class="card">
 		<h2>Datos de la propiedad</h2>
-		<PropiedadForm values={valores} error={form?.error ?? null} submitLabel="Guardar cambios" asesores={data.asesores} />
+		<PropiedadForm values={f?.values ?? valores} error={f?.error ?? null} campo={f?.campo ?? null} submitLabel="Guardar cambios" asesores={data.asesores} />
 		{#if form?.ok}<p class="ok">{form.ok}</p>{/if}
 	</section>
 

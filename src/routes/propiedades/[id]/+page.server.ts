@@ -1,6 +1,6 @@
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { parsePropiedad, storagePathFromUrl } from '../../../lib/propiedades';
+import { parsePropiedad, storagePathFromUrl, valoresDelForm } from '../../../lib/propiedades';
 
 const BUCKET = 'propiedades';
 
@@ -32,7 +32,7 @@ export const actions: Actions = {
   guardar: async ({ request, locals, params }) => {
     const form = await request.formData();
     const parsed = parsePropiedad(form);
-    if (parsed.error || !parsed.data) return fail(400, { error: parsed.error ?? 'Revisá los datos.' });
+    if (parsed.error || !parsed.data) return fail(400, { error: parsed.error ?? 'Revisá los datos.', campo: parsed.campo ?? null, values: valoresDelForm(form) });
 
     const { error: dbError } = await locals.supabase!
       .from('propiedades')

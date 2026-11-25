@@ -42,26 +42,39 @@ const num = (f: FormData, k: string) => {
   return Number.isFinite(n) ? n : NaN;
 };
 
-// Convierte el formulario en datos válidos o devuelve el primer error.
-export function parsePropiedad(form: FormData): { data?: PropiedadInput; error?: string } {
+// Nombres legibles de los campos numéricos, para los mensajes de error.
+export const LABELS: Record<string, string> = {
+  ambientes: 'ambientes',
+  dormitorios: 'dormitorios',
+  banos: 'baños',
+  superficie_m2: 'superficie',
+  antiguedad_anios: 'antigüedad',
+  precio_venta: 'precio de venta',
+  precio_alquiler: 'precio de alquiler'
+};
+
+// Convierte el formulario en datos válidos o devuelve el primer error y el campo que lo originó.
+export function parsePropiedad(form: FormData): { data?: PropiedadInput; error?: string; campo?: string } {
+  const fallar = (campo: string, error: string) => ({ error, campo });
+
   const direccion = txt(form, 'direccion');
-  if (!direccion) return { error: 'La dirección es obligatoria.' };
+  if (!direccion) return fallar('direccion', 'Falta la dirección.');
 
   const operacion = String(form.get('operacion') ?? '') as Operacion;
-  if (!['venta', 'alquiler', 'ambas'].includes(operacion)) return { error: 'Elegí una operación válida.' };
+  if (!['venta', 'alquiler', 'ambas'].includes(operacion)) return fallar('operacion', 'Elegí una operación válida.');
 
   const numeros = ['ambientes', 'dormitorios', 'banos', 'superficie_m2', 'antiguedad_anios', 'precio_venta', 'precio_alquiler'];
   for (const k of numeros) {
-    if (Number.isNaN(num(form, k))) return { error: `Revisá el valor de ${k.replace('_', ' ')}.` };
+    if (Number.isNaN(num(form, k))) return fallar(k, `Revisá el valor de ${LABELS[k]}: tiene que ser un número.`);
   }
 
   const precioVenta = num(form, 'precio_venta') as number | null;
   const precioAlquiler = num(form, 'precio_alquiler') as number | null;
   if ((operacion === 'venta' || operacion === 'ambas') && precioVenta === null) {
-    return { error: 'Falta el precio de venta.' };
+    return fallar('precio_venta', 'Falta el precio de venta.');
   }
   if ((operacion === 'alquiler' || operacion === 'ambas') && precioAlquiler === null) {
-    return { error: 'Falta el precio de alquiler.' };
+    return fallar('precio_alquiler', 'Falta el precio mensual de alquiler.');
   }
 
   return {
@@ -86,6 +99,17 @@ export function parsePropiedad(form: FormData): { data?: PropiedadInput; error?:
       asesor_id: txt(form, 'asesor_id')
     }
   };
+}
+
+// Valores tal como los mandó el usuario, para volver a cargarlos si el envío falla.
+export function valoresDelForm(form: FormData): Record<string, string> {
+  const out: Record<string, string> = {};
+  form.forEach((val, k) => {
+    if (typeof val === 'string') out[k] = val;
+  });
+  out.cochera = form.get('cochera') === 'on' ? 'true' : 'false';
+  out.publicada = form.get('publicada') === 'on' ? 'true' : 'false';
+  return out;
 }
 
 // Ruta interna de Storage a partir de la URL pública guardada en la tabla fotos.
